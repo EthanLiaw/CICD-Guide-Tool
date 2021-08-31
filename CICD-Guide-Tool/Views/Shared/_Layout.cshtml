@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DSET CI/CD Guidance</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="text-white bg-dark" style="height: 125vh; text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); box-shadow: inset 0 2.5rem 5rem rgba(0, 0, 0, .5); padding-top: 70px;">
+    <header class="masthead">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark mb-3" style="margin-left:0px;">
+            <div class="navbar" style="margin-left: 0px; width: 100%">
+                <a class="navbar-brand masthead-brand" style="width:20%" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/Eaton-logo-reversed.png" class="float-left" style="object-fit:contain; width:70px">
+                    <h5 class="flex-nowrap">DSET CI/CD Guidance</h5>
+                </a>
+                <nav class="nav nav-masthead nav nav-masthead justify-content-center" id="navLinks">
+                    <a class="nav-link" id="homelink" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="nav-link" id="privacylink" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </nav>
+                <nav class="navbar-nav ml-auto">
+                    <h5>@ViewData["User"]</h5>
+                </nav>
+            </div>
+            
+        </nav>
+    </header>
+    <div id="startchange" class="cover-container container-fluid" style="margin-left:0px; height:stretch">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿@model ComponentSubmission
+@{
+    ViewData["Title"] = "Modify Components";
+}
+
+<h2>Add A Component</h2>
+
+
+<table class="table-dark">
+    <thead>
+        <tr>
+            <th>
+                Component Property
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p>Name of Component</p>
+            </td>
+            @using (Html.BeginForm("AddComponent", "ComponentAdd", FormMethod.Post, new { }))
+            {
+        <td>
+            @Html.TextBoxFor(m => m.componentName)<br />
+            @Html.ValidationMessageFor(m => m.componentName, "", new {@class="text-danger"})
+        </td>
+                <td>
+                    <input type="submit" class="btn btn-primary" value="AddComponent" />
+                </td>
+            }
+        </tr>
+        <tr>
+            <div>
+                <td>
+                    <p>Platforms For Use</p>
+                </td>
+            </div>
+
+                <td>
+                    <div style="margin-bottom:10px">
+                        @using (Html.BeginForm("AddPlatform", "ComponentAdd", FormMethod.Post, new { }))
+                        {
+                            <!-- form goes here -->
+                            @Html.TextBoxFor(m=>m.draftSubmission.ChosenPlatformId)
+                            <button type="submit" class="btn btn-secondary" value="AddPlatform">Add Platform</button>
+                        }
+                    </div>
+                    <table class="table-dark">
+                        <tbody style="max-height:225px; overflow-y:auto; display:block">
+                            @foreach (var platform in Model.draftSubmission.AvailablePlatforms)
+                            {
+                                <tr>
+                                    <td style="width:225px">
+                                        
+                                        <p style="width: 100px; float: left">
+                                            @platform
+                                        </p>
+                                        <input type="button"
+                                               class="btn btn-outline-danger btn-sm "
+                                               value="Remove"
+                                               href="@Url.Action("RemovePlatform","ComponentAdd")"/>    
+                                        
+                                    </td>
+                                    
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </td>
+            
+
+        </tr>
+        <tr>
+            
+        </tr>
+    </tbody>
+</table>

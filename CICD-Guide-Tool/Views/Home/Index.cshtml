@@ -1,0 +1,109 @@
+﻿@using CICD_Guide_Tool.Models
+@model CicdPlan
+
+@{
+    ViewData["Title"] = "Home Page";
+    var NoStepsFilled = Model.NoStepsFilled();
+    var SidebarVisibility = NoStepsFilled ? "component-sidebar-hidden" : "component-sidebar";
+    var MainContent = NoStepsFilled ? "main-content-sidebar-hidden" : "main-content";
+}
+
+<div class="page" style="margin-left:0px; display:inline-block">
+    <div class="@SidebarVisibility" style="">
+        <aside >
+            <div>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    <table class="table-dark" style="width: 250px; background-color: transparent;">
+                        <thead style="max-width:225px;display:block">
+                            <tr>
+                                <th>
+                                    Choose Your CI/CD Components
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var step in Model.steps)
+                            {
+                                <tr class="mt-3" style="display:block">
+                                    <td>@Html.DisplayFor(modelitem => step.Value.StepName)</td>
+                                </tr>
+                                <tr class="mb-3" style="display:block">
+                                    <td class="dropdown">@Html.DropDownListFor(model => model.steps[step.Key].ChosenPlatformId, new SelectList(step.Value.AvailablePlatforms, "Id", "Name"), step.Value.StepName, new { onchange = "this.form.submit();", @class = "dropdown btn fw-bold border-white bg-white dropdown-toggle", @style = "width:225px;" })</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+            </div>
+        </aside>
+    </div>
+
+    <div class="text-center @MainContent" style="/*margin-left:275px*/">
+        <div class="my-5">
+            <h1 class="cover-heading float-md-start mb-0">Devise and Execute your CI/CD Plan.</h1>
+        </div>
+        <div class="float-container">
+
+            <div>
+                <p class="lead mb-5">Select your technology of choice for each CI/CD Component.</p>
+                @if (NoStepsFilled)
+                {
+                    <div class="inner-cover" style="max-width: 40%; margin: 0 auto;">
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                        {
+                            <table class="table-dark" style="background-color: transparent; margin: 0 auto;">
+                                <thead style="display:block">
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var step in Model.steps)
+                                    {
+                                        <tr class="mb-3" style="display:block">
+                                            <td class="dropdown">@Html.DropDownListFor(Model => Model.steps[step.Key].ChosenPlatformId, new SelectList(step.Value.AvailablePlatforms, "Id", "Name"), step.Value.StepName, new { onchange = "this.form.submit();", @class = "dropdown btn fw-bold border-white bg-white dropdown-toggle", @style = "width:225px; font-weight:700;" })</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                }
+
+            <div style="width:80%;margin:0 auto" id="accordionExample">
+                @foreach (var step in Model.steps)
+                {
+                    if (ViewData[step.Key.ToString()] != null)
+                    {
+                        <div class="card my-3" style="width: 100%; margin:auto; background:#333;">
+                            <img src="@Url.Content(step.Value.ChosenPlatform.ImagePath)" class="card-img-top" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@step.Value.StepName</h5>
+                                <p class="card-text"><strong>The Chosen platform for @step.Value.StepName is @(step.Value.ChosenPlatform.Name + ".")</strong> @step.Value.ChosenPlatform.Description</p>
+                                <button class="btn btn-secondary bg-white" type="button" data-toggle="collapse" data-target="#@(step.Value.ChosenPlatform.Name.Replace(".","").Replace(" ","") + "Details")" aria-expanded="false" aria-controls=@(step.Value.ChosenPlatform.Name + "Details")>Toggle second element</button>
+                                <a href="@step.Value.ChosenPlatform.Url" target="_blank" class="btn btn-secondary bg-white">Learn more about @step.Value.ChosenPlatform.Name</a>
+                                <div class="collapse multi-collapse" id=@(step.Value.ChosenPlatform.Name.Replace(".","").Replace(" ","") + "Details")>
+                                    <div class="card card-body bg-dark my-2">
+                                        some deets. this is gonna be really big i guess? its all the other info not shown on the card originally.
+                                        @Html.Raw(step.Value.ChosenPlatform.Description)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+                
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+

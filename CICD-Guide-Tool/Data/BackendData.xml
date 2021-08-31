@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<backend>
+  <devops-components>
+    <cicd-component>
+      <id>0</id>
+      <component-name>CI/CD Orchestration Tool</component-name>
+      <available-platforms>
+        <platform>Azure</platform>
+        <platform>Bamboo</platform>
+        <platform>Jenkins</platform>
+        <platform>Github Actions</platform>
+      </available-platforms>
+    </cicd-component>
+    <cicd-component>
+      <id>1</id>
+      <component-name>Repository</component-name>
+      <available-platforms>
+        <platform>Azure Repos</platform>
+        <platform>Github Enterprise</platform>
+        <platform>Bitbucket</platform>
+        <platform>Team Foundation Services</platform>
+      </available-platforms>
+    </cicd-component>
+    <cicd-component>
+      <id>2</id>
+      <component-name>Language</component-name>
+      <available-platforms>
+        <platform>Python</platform>
+        <platform>.NET</platform>
+        <platform>Java</platform>
+        <platform>c/c++</platform>
+        <platform>Go</platform>
+      </available-platforms>
+    </cicd-component>
+    <cicd-component>
+      <id>3</id>
+      <component-name>Deployment Platform</component-name>
+      <available-platforms>
+        <platform>Azure</platform>
+        <platform>Openshift</platform>
+      </available-platforms>
+    </cicd-component>
+  </devops-components>
+  <component-platforms>
+    <platform>GitFlow</platform>
+    <platform>Github Flow</platform>
+    <platform>GitLab Flow</platform>
+    <platform>newplat</platform>
+  </component-platforms>
+</backend>
